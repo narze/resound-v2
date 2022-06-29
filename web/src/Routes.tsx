@@ -14,6 +14,7 @@ import AudiosLayout from 'src/layouts/AudiosLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/audios/soundboard" page={AudiosSoundboardPage} name="audiosSoundboard" />
       <Set wrap={AudiosLayout}>
         <Route path="/audios/new" page={AudioNewAudioPage} name="newAudio" />
         <Route path="/audios/{id:Int}/edit" page={AudioEditAudioPage} name="editAudio" />

@@ -14030,6 +14030,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"howler@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "howler@npm:2.2.3"
+  checksum: bf0181c81257a8e3e84825c1f09c576bed575ac906807eda955a98eb8f287df59e9e2bb1c4ad101a31e9815c2e17b7733d9544774de84ac6ee3f389dd2ae0f5a
+  languageName: node
+  linkType: hard
+
 "hpack.js@npm:^2.1.6":
   version: 2.1.6
   resolution: "hpack.js@npm:2.1.6"
@@ -24242,6 +24249,7 @@ __metadata:
     "@redwoodjs/web": 2.0.0
     autoprefixer: ^10.4.7
     filestack-react: ^4.0.1
+    howler: ^2.2.3
     postcss: ^8.4.14
     postcss-loader: ^7.0.0
     prop-types: 15.8.1
