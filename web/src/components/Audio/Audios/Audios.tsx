@@ -6,6 +6,15 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Audio/AudiosCell'
 
+const AudioPlayer = ({ url }) => {
+  return (
+    <audio controls>
+      <source src={url} type="audio/mpeg" />
+      Your browser does not support the audio tag.
+    </audio>
+  )
+}
+
 const DELETE_AUDIO_MUTATION = gql`
   mutation DeleteAudioMutation($id: Int!) {
     deleteAudio(id: $id) {
@@ -82,6 +91,7 @@ const AudiosList = ({ audios }) => {
             <th>Id</th>
             <th>Title</th>
             <th>Url</th>
+            <th>Preview</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -91,6 +101,9 @@ const AudiosList = ({ audios }) => {
               <td>{truncate(audio.id)}</td>
               <td>{truncate(audio.title)}</td>
               <td>{truncate(audio.url)}</td>
+              <td>
+                <AudioPlayer url={truncate(audio.url)} />
+              </td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
