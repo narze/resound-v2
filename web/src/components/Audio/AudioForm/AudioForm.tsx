@@ -11,6 +11,8 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
+import { AudioPlayer } from '../AudioPlayer'
+
 const AudioForm = (props) => {
   const [url, setUrl] = useState(props?.audio?.url)
 
@@ -66,14 +68,29 @@ const AudioForm = (props) => {
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
           /> */}
-        {url}
+
+        {url && (
+          <div>
+            <AudioPlayer url={url} />
+            <button
+              onClick={() => setUrl(null)}
+              className="rw-button rw-button-blue"
+            >
+              Replace Audio
+            </button>
+          </div>
+        )}
 
         <FieldError name="url" className="rw-field-error" />
 
         <PickerInline
           apikey={process.env.REDWOOD_ENV_FILESTACK_API_KEY}
           onSuccess={onFileUpload}
-        />
+        >
+          <div
+            style={{ display: url ? 'none' : 'block', height: '300px' }}
+          ></div>
+        </PickerInline>
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
