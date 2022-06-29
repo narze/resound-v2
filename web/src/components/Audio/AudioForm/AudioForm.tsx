@@ -1,3 +1,7 @@
+import { useState } from 'react'
+
+import { PickerInline } from 'filestack-react'
+
 import {
   Form,
   FormError,
@@ -7,19 +11,17 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
-
-
 const AudioForm = (props) => {
-  const onSubmit = (data) => {
+  const [url, setUrl] = useState(props?.audio?.url)
 
-  
-    
-    
-  
-    
-    
-  
-    props.onSave(data, props?.audio?.id)
+  const onSubmit = (data) => {
+    const dataWithUrl = Object.assign(data, { url })
+
+    props.onSave(dataWithUrl, props?.audio?.id)
+  }
+
+  const onFileUpload = (response) => {
+    setUrl(response.filesUploaded[0].url)
   }
 
   return (
@@ -31,7 +33,7 @@ const AudioForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="title"
           className="rw-label"
@@ -39,18 +41,16 @@ const AudioForm = (props) => {
         >
           Title
         </Label>
-        
-          <TextField
-            name="title"
-            defaultValue={props.audio?.title}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="title"
+          defaultValue={props.audio?.title}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="title" className="rw-field-error" />
-
         <Label
           name="url"
           className="rw-label"
@@ -58,23 +58,25 @@ const AudioForm = (props) => {
         >
           Url
         </Label>
-        
-          <TextField
+
+        {/* <TextField
             name="url"
             defaultValue={props.audio?.url}
             className="rw-input"
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
-          />
-        
+          /> */}
+        {url}
 
         <FieldError name="url" className="rw-field-error" />
 
+        <PickerInline
+          apikey={process.env.REDWOOD_ENV_FILESTACK_API_KEY}
+          onSuccess={onFileUpload}
+        />
+
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
