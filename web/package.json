@@ -18,6 +18,7 @@
     "@redwoodjs/web": "2.0.0",
     "filestack-react": "^4.0.1",
     "howler": "^2.2.3",
+    "peerjs": "^1.4.6",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
