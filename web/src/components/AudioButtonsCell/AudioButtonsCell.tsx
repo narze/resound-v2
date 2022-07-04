@@ -56,8 +56,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 const AudioButton = ({ audio, volume }) => {
   function playSound() {
-    console.log({ audio, volume })
-
     if (connectionReady) {
       conn.send({ audio, volume })
     } else {

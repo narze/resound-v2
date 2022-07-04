@@ -24,15 +24,16 @@ const Volume = () => {
 
   return (
     <div>
-      Volume:{' '}
+      Volume
       <input
-        type="number"
+        type="range"
         value={volume}
         onChange={onChange}
         step=".01"
         min="0"
         max="1"
       />
+      {volume}
     </div>
   )
 }
