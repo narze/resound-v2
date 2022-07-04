@@ -11,6 +11,7 @@ const peer = new Peer('resound-v2')
 const OverlayPage = () => {
   const [ready, setReady] = useState(false)
   const [audioName, setAudioName] = useState('')
+  const [volume, setVolume] = useState(0)
 
   useEffect(() => {
     peer.on('open', (id) => {
@@ -23,13 +24,16 @@ const OverlayPage = () => {
 
       conn.on('data', function (data) {
         console.log('Received', data)
+        const audio = data['audio']
+        const volume = data['volume']
 
-        setAudioName(data['title'])
+        setAudioName(audio['title'])
+        setVolume(volume)
 
         const sound = new Howl({
-          src: [data['url']],
-          format: ['mp3'],
-          volume: 0.1,
+          src: audio['url'],
+          format: 'mp3',
+          volume,
           onend: () => {
             setAudioName('')
           },
@@ -46,7 +50,9 @@ const OverlayPage = () => {
       <p>{ready ? 'Ready' : 'Connecting...'}</p>
 
       <p>
-        {audioName.length > 0 ? `Playing ${audioName}` : 'No audio playing'}
+        {audioName.length > 0
+          ? `Playing ${audioName} @ ${volume}`
+          : 'No audio playing'}
       </p>
     </>
   )
