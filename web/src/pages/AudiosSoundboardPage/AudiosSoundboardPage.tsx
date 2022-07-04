@@ -15,6 +15,11 @@ export const volumeState = atom({
   default: 0.2,
 })
 
+export const columnState = atom({
+  key: 'column',
+  default: 4,
+})
+
 const Volume = () => {
   const [volume, setVolume] = useRecoilState(volumeState)
 
@@ -38,14 +43,38 @@ const Volume = () => {
   )
 }
 
+const Column = () => {
+  const [column, setColumn] = useRecoilState(columnState)
+
+  function onChange(event) {
+    setColumn(+event.target.value)
+  }
+
+  return (
+    <div>
+      Column
+      <input
+        type="range"
+        value={column}
+        onChange={onChange}
+        step="1"
+        min="3"
+        max="10"
+      />
+      {column}
+    </div>
+  )
+}
+
 const AudiosSoundboardPage = () => {
   return (
     <RecoilRoot>
       <MetaTags title="AudiosSoundboard" description="AudiosSoundboard page" />
 
-      <AudioButtonsCell />
-
       <Volume />
+      <Column />
+
+      <AudioButtonsCell />
     </RecoilRoot>
   )
 }
